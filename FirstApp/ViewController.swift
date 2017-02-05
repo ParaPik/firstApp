@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func clickMeTaped(_ sender: Any) {
-        message.text = textField.text!
+        message.text = "Got message: \(textField.text!)"
     }
 }
 
