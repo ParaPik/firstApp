@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        textField.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,6 +26,28 @@ class ViewController: UIViewController {
 
     @IBAction func clickMeTaped(_ sender: Any) {
         message.text = "Got message: \(textField.text!)"
+        textField.resignFirstResponder()
     }
+    
+    @IBAction func showTaped(_ sender: Any) {
+        performSegue(withIdentifier: "ShowSecond", sender: nil)
+    }
+}
+
+extension ViewController : UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        message.text = "Begin editing"
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        message.text = "End editing"
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        message.text = "Will change '\(string)'"
+        return string != "b"
+    }
+    
 }
 
